@@ -1,0 +1,11 @@
+variant: fcos
+version: 1.1.0
+passwd:
+  users:
+    - name: vagrant
+      ssh_authorized_keys:
+        - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjXKDobZFFAQYk3eRB/RGQ23EHNjHma2tbUh1wP+O+N"
+      groups:
+        - wheel
+        - sudo
+        - docker

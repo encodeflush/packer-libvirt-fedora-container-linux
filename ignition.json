@@ -1,0 +1,20 @@
+{
+  "ignition": {
+    "version": "3.1.0"
+  },
+  "passwd": {
+    "users": [
+      {
+        "groups": [
+          "wheel",
+          "sudo",
+          "docker"
+        ],
+        "name": "vagrant",
+        "sshAuthorizedKeys": [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICjXKDobZFFAQYk3eRB/RGQ23EHNjHma2tbUh1wP+O+N"
+        ]
+      }
+    ]
+  }
+}
