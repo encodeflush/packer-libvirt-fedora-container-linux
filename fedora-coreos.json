@@ -1,0 +1,52 @@
+{
+  "builders": [
+    {
+      "accelerator": "kvm",
+      "boot_command": [
+        "<enter>",
+        "<wait30s>",
+        "sudo /usr/bin/coreos-installer install /dev/vda --ignition-url {{user `ignition_url`}} --ignition-hash {{user `ignition_hash`}} -u {{user `raw_url`}}",
+        "<enter>",
+        "<wait3m>",
+        "reboot",
+        "<enter>",
+        "<wait30s>"
+      ],
+      "boot_wait": "5s",
+      "disk_size": "{{ user `disk_size` }}",
+      "format": "qcow2",
+      "iso_checksum": "{{ user `iso_checksum_type` }}:{{ user `iso_checksum` }}",
+      "iso_url": "{{user `iso_url`}}",
+      "output_directory": "builds",
+      "qemuargs": [
+        [
+          "-m",
+          "{{user `memory` }}"
+        ]
+      ],
+      "shutdown_command": "sudo /sbin/shutdown -P -h now",
+      "ssh_username": "vagrant",
+      "type": "qemu",
+      "vm_name": "container-linux-{{user `release` }}.qcow2"
+    }
+  ],
+  "post-processors": [
+    {
+      "compression_level": 9,
+      "output": "fedora-coreos.box",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [],
+  "variables": {
+    "disk_size": "40000",
+    "ignition_hash": "sha256-a8970e15e93c55efca56ff15009702976f24882cbf328472fb04568d8fe4c083",
+    "ignition_url": "https://raw.githubusercontent.com/encodeflush/packer-libvirt-fedora-container-linux/main/ignition.json",
+    "iso_checksum": "edabd790f706530a69c0e3b779767595c5114edf86474a91176cce16edcf0663",
+    "iso_checksum_type": "sha256",
+    "iso_url": "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/32.20201004.3.0/x86_64/fedora-coreos-32.20201004.3.0-live.x86_64.iso",
+    "memory": "2048M",
+    "raw_url": "https://builds.coreos.fedoraproject.org/prod/streams/stable/builds/32.20201004.3.0/x86_64/fedora-coreos-32.20201004.3.0-metal.x86_64.raw.xz"
+  }
+}
+
